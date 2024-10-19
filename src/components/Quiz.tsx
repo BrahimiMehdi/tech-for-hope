@@ -85,9 +85,8 @@ export default function Quiz() {
         </div>
         <button type="submit">Submit</button>
       </form>
-
-      {submitted && (
-        <div id='container'>
+       {submitted && (
+        <div >
           <h2>Your estimated risk is: {score}%</h2>
         </div>
       )}
