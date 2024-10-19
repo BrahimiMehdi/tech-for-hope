@@ -7,7 +7,7 @@ import {} from "next-auth";
 import { Metadata } from "next/types";
 import { auth, signOut } from "@/auth";
 import SessionProvider from "@/components/auth/SessionProvider";
-import NavBar from "@/components/navigation/NavBar";
+import NavBar from "@/components/admin-navigation/NavBar";
 import { Toaster } from "@/components/ui/toaster";
 import { redirect } from "next/navigation";
 import { Poppins, Gowun_Batang } from "next/font/google";
