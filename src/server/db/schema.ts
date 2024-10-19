@@ -15,7 +15,7 @@ export const blogs = pgTable("blogs", {
   slug: text("slug").notNull(),
   description: text("description").notNull(),
   content: text("content").notNull(),
-  category: text("category", { enum: ["trending", "health","pink october"] }).default("health"),
+  category: text("category", { enum: ["trending", "health", "pink october"] }).default("health"),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 export const users = pgTable("user", {
@@ -36,3 +36,25 @@ export const assets = pgTable("assets", {
     .$defaultFn(() => uuid()),
   path: varchar("path", { length: 255 }),
 });
+
+export const assetRelations = relations(assets, ({ many, one }) => ({
+  blogs: many(blogs),
+  users:many(users)
+}));
+export const userRelations = relations(users, ({ many, one }) => ({
+  blogs: many(blogs),
+  image: one(assets, {
+    fields: [users.imageId],
+    references: [assets.id],
+  }),
+}));
+export const blogRelations = relations(blogs, ({ one }) => ({
+  user: one(users, {
+    fields: [blogs.userId],
+    references: [users.id],
+  }),
+  image: one(assets, {
+    fields: [blogs.imageId],
+    references: [assets.id],
+  }),
+}));
